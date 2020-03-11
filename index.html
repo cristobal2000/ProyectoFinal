@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resolucion de una ecuación de segundo grado.</title>
+</head>
+
+<body>
+<H2>Resolucion la ecuación de tipo: a + bx + cx^2.</H2>
+
+<form>
+    <p>a = <input type="number" id="letterA"></p>
+    <p>b = <input type="number" id="letterB"></p>
+    <p>c = <input type="number" id="letterC"></p>
+    <button id="btn_enviar">Enviar</button>
+    <p><input type="reset" value="Restablecer" name="B2">&nbsp;</p>
+
+</form>
+<br>
+<table border="2px" id="table">
+    <tr><th>x</th><th>y</th></tr>
+</table>
+<script type="text/javascript">
+    var xhReq = new XMLHttpRequest();
+    var boton =  document.getElementById("btn_enviar");
+    boton.addEventListener("click",enviarParametros);
+        function enviarParametros(event) {
+            event.preventDefault();
+            xhReq.open("POST", "app.php", true);
+
+            let a = document.getElementById("letterA").value;
+            let b = document.getElementById("letterB").value;
+            let c = document.getElementById("letterC").value;
+            xhReq.onreadystatechange = function () {
+                if ((xhReq.status == 200)) {
+                    console.log(xhReq.responseText);
+                }
+                let addTabla = document.getElementById("table");
+                addTabla.innerHTML = xhReq.responseText;
+            };
+            xhReq.send(JSON.stringify({a, b, c}));
+        }
+
+</script>
+</body>
+</html>
