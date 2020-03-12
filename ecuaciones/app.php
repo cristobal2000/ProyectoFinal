@@ -2,7 +2,7 @@
 $datosRecibidos = file_get_contents("php://input");
 $datos = json_decode($datosRecibidos, true);
 
-require "vendor/autoload.php";
+require "../vendor/autoload.php";
 
 $ecuacionGrado2 = new ecuaciones\modelo\EcuacionGrado2($datos['a'],$datos['b'],$datos['c']);
 
